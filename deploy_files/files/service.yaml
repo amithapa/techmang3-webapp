@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-api
+  name: service-webapp
   namespace: {{ constants["deploy_env_status"] }}-techmang3
 spec:
   ports:
-    - port: 8989
-      targetPort: p-api
-      nodePort: {{ constants[constants["deploy_env_status"]]["techmang3-api"]["node_port"] }}
+    - port: 80
+      targetPort: p-webapp
+      nodePort: {{ constants[constants["deploy_env_status"]]["techmang3-webapp"]["node_port"] }}
   type: NodePort
   externalTrafficPolicy: Local
   selector:
-    module: techmang3-api
+    module: techmang3-webapp

@@ -1,2 +1,3 @@
-FROM php:7.0-apache
-COPY ./website/ /var/www/html
+FROM php:7.2-apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+COPY website/ /var/www/html/

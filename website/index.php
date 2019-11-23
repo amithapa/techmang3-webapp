@@ -39,7 +39,7 @@
             <div class="hero-body">
               <div class="container has-text-centered">
                 <h1 class="title">
-                  Production
+                  <?php echo ucfirst($_ENV["INSTANCE_STATUS"]) ?>
                 </h1>
                 <h2 class="subtitle">
                   Demo
@@ -50,7 +50,12 @@
             <!-- Hero footer: will stick at the bottom -->
         </section>
         <div class="container">
-            
+          <?php 
+            #$json = file_get_contents('http://service-api:8989/people');
+            $json = file_get_contents('http://192.168.29.101:32000/people');
+            $obj = json_decode($json);
+         
+         ?>
         <table class="table is-fullwidth is-striped ">
             <thead>
               <tr>
@@ -62,20 +67,15 @@
               </tr>
             </thead>
             <tbody>
+              <?php foreach ($obj as $key => $value) { ?>
               <tr>
-                <th>1</th>
-                <td><a href="https://twitter.com/JovelCardoso" title="JovelCardoso">JovelCardoso</a></td>
-                <td>24</td>
-                <td>Goa</td>
-                <td>jovelc07@gmail.com</td>
+                <th><?php echo $key+1 ?></th>
+                <td><a href="https://twitter.com/<?php echo $value->{'handler'} ?>" title="<?php echo $value->{'handler'} ?>"><?php echo $value->{'fname'} . ' ' . $value->{'lname'}; ?></a></td>
+                <td><?php echo $value->{'age'} ?></td>
+                <td><?php echo $value->{'state'} ?></td>
+                <td><?php echo $value->{'email'} ?></td>
               </tr>
-              <tr>
-                <th>1</th>
-                <td><a href="https://twitter.com/JovelCardoso" title="JovelCardoso">JovelCardoso</a></td>
-                <td>24</td>
-                <td>Goa</td>
-                <td>jovelc07@gmail.com</td>
-              </tr>
+              <?php } ?>
             </tbody>
           </table>
         

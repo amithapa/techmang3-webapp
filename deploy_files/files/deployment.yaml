@@ -1,22 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-techmang3-api
+  name: deployment-techmang3-webapp
   namespace: {{ constants["deploy_env_status"] }}-techmang3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      module: techmang3-api
+      module: techmang3-webapp
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        module: techmang3-api
+        module: techmang3-webapp
     spec:
       containers:
-      - image: {{ constants[constants["deploy_env_status"]]["techmang3-api"]["image"] }}:{{ constants["docker_image_version"] }}
+      - image: {{ constants[constants["deploy_env_status"]]["techmang3-webapp"]["image"] }}:{{ constants["docker_image_version"] }}
+        env:
+        - name: INSTANCE_STATUS
+          value: {{ constants[constants["deploy_env_status"]] }}
         resources:
           requests:
             memory: "100Mi"
@@ -25,8 +28,8 @@ spec:
             memory: "300Mi"
             cpu: "200m"
         imagePullPolicy: Always
-        name: container-api
+        name: container-webapp
         ports:
-        - name: p-api
-          containerPort: 8989
-        command: ["python3", "/app/api.py"]
+        - name: p-webapp
+          containerPort: 80
+
