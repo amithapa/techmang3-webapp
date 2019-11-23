@@ -51,8 +51,7 @@
         </section>
         <div class="container">
           <?php 
-            #$json = file_get_contents('http://service-api:8989/people');
-            $json = file_get_contents('http://192.168.29.101:32000/people');
+            $json = file_get_contents('http://service-api:8989/people');
             $obj = json_decode($json);
          
          ?>
