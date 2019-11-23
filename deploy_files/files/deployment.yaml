@@ -19,7 +19,7 @@ spec:
       - image: {{ constants[constants["deploy_env_status"]]["techmang3-webapp"]["image"] }}:{{ constants["docker_image_version"] }}
         env:
         - name: INSTANCE_STATUS
-          value: {{ constants[constants["deploy_env_status"]] }}
+          value: {{ constants["deploy_env_status"] }}
         resources:
           requests:
             memory: "100Mi"
